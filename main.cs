@@ -41,6 +41,7 @@ class passworder {
             Console.Write("Путь к файлу: ");
             string txt = Console.ReadLine();
             FileInfo text = new FileInfo(txt);
+		    if (text.Exists) text.Delete();
             Console.Write("Текст для зашифровки: ");
             string tte = Console.ReadLine();
             using (var bgb = text.AppendText()) {
