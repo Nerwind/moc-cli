@@ -35,7 +35,7 @@ class passworder {
             return;
         }
         Cipher enc = new Cipher((ulong)Convert.ToInt32(sbbbb));
-        Console.WriteLine("1 - закодировать\n2 - расшифровать");
+        Console.WriteLine("1 - закодировать\n2 - расшифровать\n3 - зашифровать отдельный файл");
         string b = Console.ReadLine();
         if (b == "1") {
             Console.Write("Путь к файлу: ");
@@ -63,6 +63,25 @@ class passworder {
             string str = reader.ReadToEnd();
             stream.Close();
             Console.WriteLine("Результат: " + enc.Decode(str));
+        } else if (b == "3") {
+            Console.Write("Путь к файлу: ");
+            string txt = Console.ReadLine();
+            FileInfo stekloochistitel = new FileInfo(txt);
+            if (!stekloochistitel.Exists) {
+                Console.WriteLine("Ошибка, данного файла не существует.");
+                Console.Read();
+                return;
+            }
+            FileStream snus = new FileStream(txt, FileMode.Open);
+            StreamReader perdezh = new StreamReader(snus);
+            string taburetka = perdezh.ReadToEnd();
+            snus.Close();
+            string dagestan = enc.Encode(taburetka);
+            stekloochistitel.Delete();
+            using (StreamWriter televizor = stekloochistitel.AppendText()) {
+                televizor.Write(dagestan);
+            }
+            Console.WriteLine("Файл зашифрован.");
         }
         Console.Read();
     }
